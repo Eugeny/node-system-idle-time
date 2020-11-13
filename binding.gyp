@@ -16,7 +16,7 @@
           "src/mac/idle.cc"
         ],
         "xcode_settings": {
-          "OTHER_CPLUSPLUSFLAGS": ["-std=c++11", "-stdlib=libc++", "-mmacosx-version-min=10.7"],
+          "OTHER_CPLUSPLUSFLAGS": ["-std=c++14", "-stdlib=libc++", "-mmacosx-version-min=10.7"],
           "OTHER_LDFLAGS": ["-framework CoreFoundation -framework IOKit"]
         }
       }],
@@ -32,8 +32,10 @@
             # Don't print a linker warning when no imports from either .exe are used.
             "AdditionalOptions": ["/ignore:4199"],
           },
+          'VCCLCompilerTool': { "ExceptionHandling": 1, 'AdditionalOptions': [ '-std:c++17' ] },
         }
-     }],
+      }
+     ],
      ['OS=="linux"', {
        "defines": [
         "OS=3"
@@ -57,6 +59,9 @@
           '<!@(<(pkg-config) --libs-only-l x11 xext xscrnsaver)',
         ],
       },
+      "cflags": [
+        "-std=c++17"
+      ],
      }]
     ]
   }]
