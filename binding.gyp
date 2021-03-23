@@ -13,11 +13,11 @@
           "OS=1"
         ],
         "sources": [
-          "src/mac/idle.cc"
+          "src/mac/idle.mm"
         ],
         "xcode_settings": {
           "OTHER_CPLUSPLUSFLAGS": ["-std=c++14", "-stdlib=libc++", "-mmacosx-version-min=10.7"],
-          "OTHER_LDFLAGS": ["-framework CoreFoundation -framework IOKit"]
+          "OTHER_LDFLAGS": ["-framework CoreFoundation", "-framework CoreGraphics"]
         }
       }],
       ['OS=="win"', {
@@ -32,7 +32,7 @@
             # Don't print a linker warning when no imports from either .exe are used.
             "AdditionalOptions": ["/ignore:4199"],
           },
-          'VCCLCompilerTool': { "ExceptionHandling": 1, 'AdditionalOptions': [ '-std:c++17' ] },
+          'VCCLCompilerTool': { "ExceptionHandling": 1, 'AdditionalOptions': [ '-std:c++14' ] },
         }
       }
      ],
@@ -60,7 +60,7 @@
         ],
       },
       "cflags": [
-        "-std=c++17"
+        "-std=c++14"
       ],
      }]
     ]
