@@ -9,5 +9,5 @@ int32_t SystemIdleTime(void) {
   return int32_t(CGEventSourceSecondsSinceLastEventType(
     kCGEventSourceStateCombinedSessionState,
     (CGEventType)(~(uint32_t)0)
-  ));
+  ) * 1000);
 }
