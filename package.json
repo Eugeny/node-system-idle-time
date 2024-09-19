@@ -1,6 +1,6 @@
 {
   "name": "@eugenepankov/system-idle-time",
-  "version": "1.0.6-beta.6",
+  "version": "2.0.0",
   "description": "Returns system idle time in seconds",
   "main": "addon.js",
   "scripts": {
@@ -21,7 +21,7 @@
   "gypfile": true,
   "homepage": "https://bitbucket.org/rbergman/system-idle-time#readme",
   "dependencies": {
-    "bindings": "~1.2.1",
-    "nan": "^2.14.2"
+    "node-addon-api": "*",
+    "bindings": "~1.2.1"
   }
 }

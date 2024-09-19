@@ -1,14 +1,18 @@
 {
+  'variables': {
+    'openssl_fips': '0',
+  },
   "targets": [{
     "target_name": "system_idle_time",
     "sources": [
       "src/module.cc"
     ],
-    "include_dirs": [
-      "<!(node -e \"require('nan')\")"
+    'dependencies': [
+      "<!(node -p \"require('node-addon-api').targets\"):node_addon_api",
     ],
     "conditions": [
       ['OS=="mac"', {
+        'cflags+': ['-fvisibility=hidden'],
         "defines": [
           "OS=1"
         ],
@@ -17,7 +21,8 @@
         ],
         "xcode_settings": {
           "OTHER_CPLUSPLUSFLAGS": ["-std=c++14", "-stdlib=libc++", "-mmacosx-version-min=10.7"],
-          "OTHER_LDFLAGS": ["-framework CoreFoundation", "-framework CoreGraphics"]
+          "OTHER_LDFLAGS": ["-framework CoreFoundation", "-framework CoreGraphics"],
+          'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES', # -fvisibility=hidden
         }
       }],
       ['OS=="win"', {

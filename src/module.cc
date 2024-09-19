@@ -1,22 +1,17 @@
-#include "module.h"
+#include "napi.h"
 #include "idle.h"
 
-using namespace v8;
-
-NAN_METHOD(IdleTime::GetIdleTime) {
-  Nan::HandleScope scope;
-
+Napi::Number GetIdleTime(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
   uint32_t idle;
   idle = SystemIdleTime();
-  info.GetReturnValue().Set(idle);
+  return Napi::Number::New(env, idle);
 }
 
-NAN_MODULE_INIT(Init) {
-  Nan::SetMethod(target, "getIdleTime", IdleTime::GetIdleTime);
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
+  exports.Set(Napi::String::New(env, "getIdleTime"),
+              Napi::Function::New(env, GetIdleTime));
+  return exports;
 }
 
-#if NODE_MAJOR_VERSION >= 10
-NAN_MODULE_WORKER_ENABLED(system_idle_time, Init)
-#else
-NODE_MODULE(system_idle_time, Init)
-#endif
+NODE_API_MODULE(NODE_GYP_MODULE_NAME, Init)
